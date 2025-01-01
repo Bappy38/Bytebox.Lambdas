@@ -26,3 +26,4 @@
 - We can also extend our pipeline if we want to add more functions in this solution. We just have to add Build and Deployment steps of newly created function.
 - Attach the policy created for FileStoreAPI to LambdaRole so that lambda can download/upload to/from S3 bucket.
 - Go to `Lambda->Configuration->Trigger` and add a trigger so that whenever there is a new object uploaded to our bucket, our lambda trigerred.
+- Go to `Lambda->Function->Configuration->Asynchronous Invocation`, setup a dead letter queue so that failed event gets stored in DLQ. To store failed event to DLQ, we need to attach `SQS Permission` to the `Lambda Execution Role`
