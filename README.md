@@ -24,3 +24,5 @@
 - Create github repository and from `Settings -> Secrets and Variables -> Actions -> `, create two secrets `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` by providing the credentials of created user
 - Now push the function code to the repository along with the pipeline. The pipeline will deploy the updated function code.
 - We can also extend our pipeline if we want to add more functions in this solution. We just have to add Build and Deployment steps of newly created function.
+- Attach the policy created for FileStoreAPI to LambdaRole so that lambda can download/upload to/from S3 bucket.
+- Go to `Lambda->Configuration->Trigger` and add a trigger so that whenever there is a new object uploaded to our bucket, our lambda trigerred.
