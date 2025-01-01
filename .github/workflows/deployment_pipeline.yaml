@@ -36,4 +36,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'ap-south-1'
         run: |
-          aws lambda update-function-code --function-name ImageThumbnailGenerator --zip-file fileb://ImageThumbnailGenerator_deployment_package.zip
+          aws lambda update-function-code --function-name Bytebox-ImageThumbnailGenerator-Dev --zip-file fileb://ImageThumbnailGenerator_deployment_package.zip
