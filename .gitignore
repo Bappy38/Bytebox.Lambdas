@@ -1,0 +1,24 @@
+# AWS Lambda tools defaults file
+aws-lambda-tools-defaults.json
+
+# Lambda deployment packages
+*.zip
+
+# Publish directory
+publish/
+
+# Additional directories
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log

@@ -1,0 +1,39 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get install -y python3-pip
+          pip3 install awscli
+
+      - name: Build and package ImageThumbnailGenerator
+        run: |
+          dotnet publish -c Release -o ImageThumbnailGenerator_Output src/ImageThumbnailGenerator/ImageThumbnailGenerator.csproj
+          cd ImageThumbnailGenerator_Output
+          zip -r ../ImageThumbnailGenerator_deployment_package.zip .
+          cd ..
+
+      - name: Deploy ImageThumbnailGenerator to AWS Lambda
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'ap-south-1'
+        run: |
+          aws lambda update-function-code --function-name ImageThumbnailGenerator --zip-file fileb://ImageThumbnailGenerator_deployment_package.zip
