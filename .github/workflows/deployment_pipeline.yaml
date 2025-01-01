@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and package ImageThumbnailGenerator
         run: |
-          dotnet publish -c Release -o ImageThumbnailGenerator_Output src/ImageThumbnailGenerator/ImageThumbnailGenerator.csproj
+          dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o ImageThumbnailGenerator_Output src/ImageThumbnailGenerator/ImageThumbnailGenerator.csproj
           cd ImageThumbnailGenerator_Output
           zip -r ../ImageThumbnailGenerator_deployment_package.zip .
           cd ..
