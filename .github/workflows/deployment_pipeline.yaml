@@ -1,4 +1,4 @@
-name: Deploy to AWS Lambda
+name: Deploy Lambdas to AWS Lambda
 
 on:
   push:
@@ -9,12 +9,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        function:
+          - name: ImageThumbnailGenerator
+            lambdaName: ImageThumbnailGenerator
+            awsFunctionName: Bytebox-ImageThumbnailGenerator-Dev
+          - name: PdfThumbnailGenerator
+            lambdaName: PdfThumbnailGenerator
+            awsFunctionName: Bytebox-PdfThumbnailGenerator-Dev
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
@@ -23,17 +33,18 @@ jobs:
           sudo apt-get install -y python3-pip
           pip3 install awscli
 
-      - name: Build and package ImageThumbnailGenerator
+      - name: Build and package Lambdas
         run: |
-          dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o ImageThumbnailGenerator_Output src/ImageThumbnailGenerator/ImageThumbnailGenerator.csproj
-          cd ImageThumbnailGenerator_Output
-          zip -r ../ImageThumbnailGenerator_deployment_package.zip .
+          dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o LambdaPublishOutput src/ByteBox.Lambdas.csproj
+          cd LambdaPublishOutput
+          zip -r ../LambdaDeploymentPackage.zip .
           cd ..
 
-      - name: Deploy ImageThumbnailGenerator to AWS Lambda
+      - name: Deploy ${{ matrix.function.name }} to AWS Lambda
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'ap-south-1'
         run: |
-          aws lambda update-function-code --function-name Bytebox-ImageThumbnailGenerator-Dev --zip-file fileb://ImageThumbnailGenerator_deployment_package.zip
+          echo "Deploying ${{ matrix.function.name }} as ${{ matrix.function.awsFunctionName }}..."
+          aws lambda update-function-code --function-name ${{ matrix.function.awsFunctionName }} --zip-file fileb://LambdaDeploymentPackage.zip
