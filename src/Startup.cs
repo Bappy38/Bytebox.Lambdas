@@ -24,5 +24,6 @@ public class Startup
         services.AddAWSService<IAmazonS3>();
 
         services.AddKeyedScoped<IThumbnailGenerator, ImageThumbnailGenerator>(ServiceKeys.ImageThumbnailGenerator);
+        services.AddKeyedScoped<IThumbnailGenerator, PdfThumbnailGenerator>(ServiceKeys.PdfThumbnailGenerator);
     }
 }

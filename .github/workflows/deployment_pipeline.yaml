@@ -47,4 +47,4 @@ jobs:
           AWS_DEFAULT_REGION: 'ap-south-1'
         run: |
           echo "Deploying ${{ matrix.function.name }} as ${{ matrix.function.awsFunctionName }}..."
-          aws lambda update-function-code --function-name ${{ matrix.function.awsFunctionName }} --zip-file fileb://LambdaDeploymentPackage.zip
+          dotnet lambda deploy-function ${{ matrix.function.lambdaName }} --function-name ${{ matrix.function.awsFunctionName }} --package LambdaDeploymentPackage.zip --region $AWS_DEFAULT_REGION
