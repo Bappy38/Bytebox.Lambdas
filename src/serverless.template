@@ -3,36 +3,6 @@
   "Transform": "AWS::Serverless-2016-10-31",
   "Description": "This template is partially managed by Amazon.Lambda.Annotations (v1.6.2.0).",
   "Resources": {
-    "ImageThumbnailGenerator": {
-      "Type": "AWS::Serverless::Function",
-      "Metadata": {
-        "Tool": "Amazon.Lambda.Annotations"
-      },
-      "Properties": {
-        "Runtime": "dotnet8",
-        "CodeUri": ".",
-        "MemorySize": 256,
-        "Timeout": 120,
-        "Policies": [
-          "AWSLambdaBasicExecutionRole"
-        ],
-        "PackageType": "Zip",
-        "Handler": "ByteBox.Lambdas::ByteBox.Lambdas.Functions.ImageThumbnailGenerator_GenerateImageThumbnail_Generated::GenerateImageThumbnail",
-        "Environment": {
-          "Variables": {
-            "Thumbnail_Width": 500,
-            "Thumbnail_Height": 500,
-            "PreSignedExpiryInDays": 7,
-            "SqsOptions__SubscribedQueueName": "",
-            "SqsOptions__AwsAccessKey": "",
-            "SqsOptions__AwsSecretKey": "",
-            "SqsOptions__AwsRegion": "",
-            "SqsOptions__MaxBatchSize": "",
-            "SqsOptions__WaitTimeSeconds": ""
-          }
-        }
-      }
-    },
     "PdfThumbnailGenerator": {
       "Type": "AWS::Serverless::Function",
       "Metadata": {
@@ -61,6 +31,23 @@
             "SqsOptions__WaitTimeSeconds": ""
           }
         }
+      }
+    },
+    "ImageThumbnailGenerator": {
+      "Type": "AWS::Serverless::Function",
+      "Metadata": {
+        "Tool": "Amazon.Lambda.Annotations"
+      },
+      "Properties": {
+        "Runtime": "dotnet8",
+        "CodeUri": ".",
+        "MemorySize": 256,
+        "Timeout": 120,
+        "Policies": [
+          "AWSLambdaBasicExecutionRole"
+        ],
+        "PackageType": "Zip",
+        "Handler": "ByteBox.Lambdas::ByteBox.Lambdas.Functions.ImageThumbnailGenerator_GenerateImageThumbnail_Generated::GenerateImageThumbnail"
       }
     }
   }
