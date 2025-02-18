@@ -11,15 +11,8 @@ namespace ByteBox.Lambdas.Functions;
 
 public class ImageThumbnailGenerator
 {
-    private readonly IThumbnailGenerator _thumbnailGenerator;
-
-    public ImageThumbnailGenerator([FromKeyedServices(ServiceKeys.ImageThumbnailGenerator)] IThumbnailGenerator thumbnailGenerator)
-    {
-        _thumbnailGenerator = thumbnailGenerator;
-    }
-
     [LambdaFunction(ResourceName = "ImageThumbnailGenerator", MemorySize = 256, Timeout = 120)]
-    public async Task GenerateImageThumbnail(S3Event evnt, ILambdaContext context)
+    public async Task GenerateImageThumbnail(S3Event evnt, ILambdaContext context, [FromKeyedServices(ServiceKeys.ImageThumbnailGenerator)] IThumbnailGenerator _thumbnailGenerator)
     {
         var eventRecords = evnt.Records ?? new List<S3Event.S3EventNotificationRecord>();
         foreach (var record in eventRecords)

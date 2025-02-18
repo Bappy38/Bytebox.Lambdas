@@ -9,15 +9,8 @@ namespace ByteBox.Lambdas.Functions;
 
 public class PdfThumbnailGenerator
 {
-    private readonly IThumbnailGenerator _thumbnailGenerator;
-
-    public PdfThumbnailGenerator([FromKeyedServices(ServiceKeys.PdfThumbnailGenerator)] IThumbnailGenerator thumbnailGenerator)
-    {
-        _thumbnailGenerator = thumbnailGenerator;
-    }
-
     [LambdaFunction(ResourceName = "PdfThumbnailGenerator", MemorySize = 256, Timeout = 120)]
-    public async Task GeneratePdfThumbnail(S3Event evnt, ILambdaContext context)
+    public async Task GeneratePdfThumbnail(S3Event evnt, ILambdaContext context, [FromKeyedServices(ServiceKeys.PdfThumbnailGenerator)] IThumbnailGenerator _thumbnailGenerator)
     {
         var eventRecords = evnt.Records ?? new List<S3Event.S3EventNotificationRecord>();
         foreach (var record in eventRecords)
