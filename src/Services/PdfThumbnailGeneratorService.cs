@@ -7,9 +7,9 @@ using NexaWrap.SQS.NET.Interfaces;
 
 namespace ByteBox.Lambdas.Services;
 
-public class PdfThumbnailGenerator : AThumbnailGenerator
+public class PdfThumbnailGeneratorService : AThumbnailGenerator
 {
-    public PdfThumbnailGenerator(IAmazonS3 s3Client, IMessageSender messageSender) : base(s3Client, messageSender)
+    public PdfThumbnailGeneratorService(IAmazonS3 s3Client, IMessageSender messageSender) : base(s3Client, messageSender)
     {
     }
 

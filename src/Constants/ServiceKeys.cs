@@ -2,6 +2,6 @@
 
 public static class ServiceKeys
 {
-    public const string ImageThumbnailGenerator = "ImageThumbnailGenerator";
-    public const string PdfThumbnailGenerator = "PdfThumbnailGenerator";
+    public const string ImageThumbnailGenerator = "ImageThumbnailGeneratorService";
+    public const string PdfThumbnailGenerator = "PdfThumbnailGeneratorService";
 }

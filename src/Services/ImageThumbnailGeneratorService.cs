@@ -8,9 +8,9 @@ using SixLabors.ImageSharp.Processing;
 
 namespace ByteBox.Lambdas.Services;
 
-public class ImageThumbnailGenerator : AThumbnailGenerator
+public class ImageThumbnailGeneratorService : AThumbnailGenerator
 {
-    public ImageThumbnailGenerator(IAmazonS3 s3Client, IMessageSender messageSender) : base(s3Client, messageSender)
+    public ImageThumbnailGeneratorService(IAmazonS3 s3Client, IMessageSender messageSender) : base(s3Client, messageSender)
     {
     }
 

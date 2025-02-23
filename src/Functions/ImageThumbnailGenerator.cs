@@ -13,10 +13,6 @@ public class ImageThumbnailGenerator
 {
     private readonly IThumbnailGenerator _thumbnailGenerator;
 
-    public ImageThumbnailGenerator()
-    {
-    }
-
     public ImageThumbnailGenerator([FromKeyedServices(ServiceKeys.ImageThumbnailGenerator)] IThumbnailGenerator thumbnailGenerator)
     {
         _thumbnailGenerator = thumbnailGenerator;

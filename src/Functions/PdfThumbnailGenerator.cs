@@ -11,10 +11,6 @@ public class PdfThumbnailGenerator
 {
     private readonly IThumbnailGenerator _thumbnailGenerator;
 
-    public PdfThumbnailGenerator()
-    {
-    }
-
     public PdfThumbnailGenerator([FromKeyedServices(ServiceKeys.PdfThumbnailGenerator)] IThumbnailGenerator thumbnailGenerator)
     {
         _thumbnailGenerator = thumbnailGenerator;

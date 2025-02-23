@@ -17,20 +17,7 @@
           "AWSLambdaBasicExecutionRole"
         ],
         "PackageType": "Zip",
-        "Handler": "ByteBox.Lambdas::ByteBox.Lambdas.Functions.PdfThumbnailGenerator_GeneratePdfThumbnail_Generated::GeneratePdfThumbnail",
-        "Environment": {
-          "Variables": {
-            "Thumbnail_Width": 500,
-            "Thumbnail_Height": 500,
-            "PreSignedExpiryInDays": 7,
-            "SqsOptions__SubscribedQueueName": "",
-            "SqsOptions__AwsAccessKey": "",
-            "SqsOptions__AwsSecretKey": "",
-            "SqsOptions__AwsRegion": "",
-            "SqsOptions__MaxBatchSize": "",
-            "SqsOptions__WaitTimeSeconds": ""
-          }
-        }
+        "Handler": "ByteBox.Lambdas::ByteBox.Lambdas.Functions.PdfThumbnailGenerator_GeneratePdfThumbnail_Generated::GeneratePdfThumbnail"
       }
     },
     "ImageThumbnailGenerator": {
