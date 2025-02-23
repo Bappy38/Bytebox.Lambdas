@@ -1,6 +1,3 @@
-# AWS Lambda tools defaults file
-aws-lambda-tools-defaults.json
-
 # Lambda deployment packages
 *.zip
 
