@@ -41,7 +41,8 @@ public abstract class AThumbnailGenerator : IThumbnailGenerator
             FileId = fileId,
             ThumbnailKey = thumbnailKey,
             ThumbnailPresignedUrl = thumbnailPreSignedUrl,
-            CorrelationId = Guid.NewGuid().ToString()
+            CorrelationId = Guid.NewGuid().ToString(),
+            ThumbnailPresignedGeneratedAt = DateTime.UtcNow
         };
         await _messageSender.SendMessageAsync("ByteBox-FileStore-Dev", thumbnailGeneratedMessage);
     }
